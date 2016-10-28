@@ -8,7 +8,7 @@ echo "Parsing fucks dictionary..."
 ./parse_dict.py "seed/fucks.txt" 1
 
 echo "Parsing corrections dictionary..."
-./parse_dict.py "seed/corrected_dict.txt" 0
+./parse_dict.py "seed/corrected_dict.txt" 1
 
 echo "Training by Miron..." && ./parse_text.py "seed/miron.txt"
 echo "Training by Leningrad..." && ./parse_text.py "seed/leningrad.txt"
