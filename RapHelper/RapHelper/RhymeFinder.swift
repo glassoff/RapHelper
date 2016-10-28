@@ -7,10 +7,9 @@ class RhymeFinder {
 
         let rs = try! db.executeQuery("SELECT * FROM words where suffix = \"\(word)\"", values: nil)
         while rs.next() {
-            let x = rs.string(forColumn: "x")
-            let y = rs.string(forColumn: "y")
-            let z = rs.string(forColumn: "z")
-            print("x = \(x); y = \(y); z = \(z)")
+            if let x = rs.string(forColumn: "word") {
+                return x
+            }
         }
 
         return word

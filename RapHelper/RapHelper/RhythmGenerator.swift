@@ -5,7 +5,7 @@ class RhythmGenerator: NSObject {
     static let vowelsStr = "а, о, э, и, у, ы, е, ё, ю, я"
     static let vowels = vowelsStr.components(separatedBy: ", ")
 
-    static let consonantStr = "б, в, г, д, ж, з, й, к, л, м, н, п, р, с, т, ф, х, ц, ч, ш, щ"
+    static let consonantStr = "б, в, г, д, ж, з, й, к, л, м, н, п, р, с, т, ф, х, ц, ч, ш, щ, ь, ъ"
     static let consonants = consonantStr.components(separatedBy: ", ")
 
     static let accent = "'".characters.first!

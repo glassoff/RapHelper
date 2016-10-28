@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let rhyme = RhymeFinder.find(ending, db: db!)
 
-//        SELECT * FROM words where suffix = "антропа"
+        print(rhyme)
 
         return true
     }
