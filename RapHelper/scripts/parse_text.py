@@ -5,10 +5,14 @@ import sys
 import re
 import appdb
 import codecs
+import os.path
+
 
 clear_pattern = re.compile('[^\w-]+')
 sentence_ends = set(['!', '?', '.', '…'])
 SENTENCE_CONST = "*new_sentence*"
+
+MISSING_WORDS_FNAME = 'missing_words.txt'
 
 class WordInfo:
     def __init__(self):
@@ -76,6 +80,8 @@ def save_result_to_db(result):
     db.execute('BEGIN TRANSACTION')
     guarantee_sentence_word_exists(db)
 
+    missing_words = load_missing_words()
+
     for word in result:
         for related_word in result[word].related:
 
@@ -83,6 +89,8 @@ def save_result_to_db(result):
             related_word_id = get_word_id(db, related_word)
 
             if (word_id is None) or (related_word_id is None):
+                if word_id is None and word != '': missing_words.add(word)
+                if related_word_id is None and related_word != '': missing_words.add(related_word)
                 continue
 
             params = {'word_id': word_id, 
@@ -99,9 +107,24 @@ def save_result_to_db(result):
     db.execute('COMMIT')
     db.close()
 
+    save_missing_words(missing_words)
+
 
 def guarantee_sentence_word_exists(db):
     db.execute('INSERT OR IGNORE INTO words (word, word_accent, suffix, count, priority) VALUES (?, ?, ?, ?, ?)', (SENTENCE_CONST, SENTENCE_CONST, SENTENCE_CONST, 0, 0))
+
+def save_missing_words(s):
+    with open(MISSING_WORDS_FNAME, 'w') as f:
+        text = ','.join(s)
+        f.write(text)
+
+def load_missing_words():
+    if not os.path.isfile(MISSING_WORDS_FNAME):
+        return set()
+
+    with open(MISSING_WORDS_FNAME, 'r') as f:
+        text = f.read()
+        return set(text.split(','))
 
 def main():
     fname = sys.argv[1]    
