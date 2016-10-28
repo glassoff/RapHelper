@@ -2,13 +2,17 @@ import UIKit
 
 class RhythmGenerator: NSObject {
 
+    static let vowelsStr = "а, о, э, и, у, ы, е, ё, ю, я"
+    static let vowels = vowelsStr.components(separatedBy: ", ")
+
+    static let consonantStr = "б, в, г, д, ж, з, й, к, л, м, н, п, р, с, т, ф, х, ц, ч, ш, щ"
+    static let consonants = consonantStr.components(separatedBy: ", ")
+
+    static let accent = "'".characters.first!
+    static let yo = "ё".characters.first!
+
     static func rhythm(with string: String) -> [Bool] {
 
-        let vowelsStr = "а, о, э, и, у, ы, е, ё, ю, я"
-        let vowels = vowelsStr.components(separatedBy: ", ")
-
-        let accent = "'".characters.first!
-        let yo = "ё".characters.first!
 
         let words = string.components(separatedBy: CharacterSet.whitespacesAndNewlines)
 
@@ -63,18 +67,18 @@ class RhythmGenerator: NSObject {
                     }
                 }
             }
-            
+
             if rhymeToTestIsGood {
                 goodRhythmes.append(rhymeToTest)
             }
         }
-        
+
         print(goodRhythmes)
-        
+
         let rhymeToReturnCharacters = (goodRhythmes.first ?? rhythmes.last!).characters.map{String($0)}
-        
+
         var boolRhymeToReturn: [Bool] = []
-        
+
         for i in 0..<syllables.count {
             let rhymeChar = rhymeToReturnCharacters[i % rhymeToReturnCharacters.count]
             if rhymeChar == "0" {
@@ -83,7 +87,31 @@ class RhythmGenerator: NSObject {
                 boolRhymeToReturn.append(true)
             }
         }
-        
+
         return boolRhymeToReturn
+    }
+
+    static func ending(with fullText: String) -> String {
+        let rhyme = rhythm(with: fullText)
+
+        let lastOneInvertedIndex: Int = rhyme.reversed().index(of: true)!
+
+        let vowelIndexToStart = (rhyme.count - lastOneInvertedIndex) - 1
+        var result: String = ""
+
+        var currentVowelIndex = -1
+
+        for character in fullText.characters.map({String($0)}) {
+            if vowels.contains(character) {
+                currentVowelIndex += 1
+            }
+            if currentVowelIndex >= vowelIndexToStart {
+                if vowels.contains(character) || consonants.contains(character) {
+                    result.append(character.characters.first!)
+                }
+            }
+        }
+        
+        return result
     }
 }
