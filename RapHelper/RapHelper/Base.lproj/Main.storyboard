@@ -20,14 +20,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NE8-tk-d9t">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="4T1-ic-FMM"/>
+                                    <constraint firstAttribute="width" constant="100" id="XPP-cu-cgA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="ПОШУМИМ БЛЯДЬ!"/>
                                 <connections>
                                     <action selector="recognizeBtnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7ww-oi-NJq"/>
+                                    <action selector="recognizeButtonTouchStart:" destination="BYZ-38-t0r" eventType="touchDown" id="aWK-NP-XSE"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kCi-Px-L4f">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>

@@ -21,11 +21,14 @@ class Word: Equatable {
 class PhraseBuilder {
     
     class func findPreviousWords(forWord word: String) -> [Word] {
-        let db = (UIApplication.shared.delegate as! AppDelegate).db
+        let dbQueue = (UIApplication.shared.delegate as! AppDelegate).dbQueue
 
         let sql = "SELECT * FROM words WHERE word_id IN (SELECT related_word_id FROM related_words WHERE word_id = (SELECT word_id FROM words WHERE word = '\(word)') ORDER BY count)"
         
-        let result = try! db?.executeQuery(sql, values: nil)
+        var result: FMResultSet?
+        dbQueue?.inDatabase({ (db) in
+            result = try! db?.executeQuery(sql, values: nil)
+        })
         
         var words = [Word]()
         

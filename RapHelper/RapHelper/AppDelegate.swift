@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var db: FMDatabase?
+    var dbQueue: FMDatabaseQueue?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -74,17 +74,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             try! FileManager.default.copyItem(at: fileURLInBundle!, to: fileDbURL)
         }
         
-        guard let db = FMDatabase(path: fileDbURL.path) else {
-            print("unable to create database")
+        guard let dbQueue = FMDatabaseQueue(path: fileDbURL.path) else {
+            print("unable to open database")
             return
         }
         
-        guard db.open() else {
-            print("Unable to open database")
-            return
-        }
-        
-        self.db = db
+        self.dbQueue = dbQueue
     }
 
 }

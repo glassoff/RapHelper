@@ -23,7 +23,7 @@ class RhythmGenerator: NSObject {
             syllables.append(contentsOf: wordSyllables)
         }
 
-        let rhythmes = ["100", "010", "001", "0001", "0010", "0100", "1000", "01", "10"]
+        let rhythmes = ["0001", "0010", "0100", "1000", "100", "010", "001", "01", "10"]
 
         var goodRhythmes: [(String, Int)] = []
 
