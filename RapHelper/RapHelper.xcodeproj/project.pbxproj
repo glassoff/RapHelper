@@ -12,6 +12,7 @@
 		3A9414C41DC36646008BA064 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A9414C21DC36646008BA064 /* Main.storyboard */; };
 		3A9414C61DC36646008BA064 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A9414C51DC36646008BA064 /* Assets.xcassets */; };
 		3A9414C91DC36646008BA064 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A9414C71DC36646008BA064 /* LaunchScreen.storyboard */; };
+		6F45C31C1DC36EA800845FEB /* RhythmGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F45C31B1DC36EA800845FEB /* RhythmGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		3A9414C51DC36646008BA064 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A9414C81DC36646008BA064 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A9414CA1DC36646008BA064 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6F45C31B1DC36EA800845FEB /* RhythmGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RhythmGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				3A9414BE1DC36646008BA064 /* AppDelegate.swift */,
+				6F45C31B1DC36EA800845FEB /* RhythmGenerator.swift */,
 				3A9414C01DC36646008BA064 /* ViewController.swift */,
 				3A9414C21DC36646008BA064 /* Main.storyboard */,
 				3A9414C51DC36646008BA064 /* Assets.xcassets */,
@@ -136,6 +139,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F45C31C1DC36EA800845FEB /* RhythmGenerator.swift in Sources */,
 				3A9414C11DC36646008BA064 /* ViewController.swift in Sources */,
 				3A9414BF1DC36646008BA064 /* AppDelegate.swift in Sources */,
 			);
@@ -297,6 +301,7 @@
 				3A9414CF1DC36646008BA064 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
