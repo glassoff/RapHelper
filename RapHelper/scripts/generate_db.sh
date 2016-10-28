@@ -13,5 +13,6 @@ echo "Parsing corrections dictionary..."
 echo "Training by Miron..." && ./parse_text.py "seed/miron.txt"
 echo "Training by Leningrad..." && ./parse_text.py "seed/leningrad.txt"
 echo "Training by Versus..." && ./parse_text.py "seed/versus.txt"
+echo "Training by Pelevin" && ./parse_text.py "seed/pelevin.txt"
 
 echo "Done. See results in words.db. See missing words in missing_words.txt"
