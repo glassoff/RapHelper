@@ -68,15 +68,17 @@ extension ViewController: YSKRecognizerDelegate {
         }
         
         let bestHypothesis = results.hypotheses.first as! YSKRecognitionHypothesis
-        let words: [YSKRecognitionWord] = bestHypothesis.words as! [YSKRecognitionWord]
+        let ysWords: [YSKRecognitionWord] = bestHypothesis.words as! [YSKRecognitionWord]
         
-        var str = ""
+        var words = [String]()
         
-        for word in words {
-            str += word.text + " "
+        for word in ysWords {
+            words.append(word.text)
         }
         
-        textView.text = str
+        let accentedPhrase = Accenter.setAccents(inPhrase: words)
+        
+        textView.text = accentedPhrase.joined(separator: " ")
     }
     
 }
