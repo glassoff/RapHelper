@@ -1,3 +1,5 @@
+#!/usr/local/bin/python3
+
 import sqlite3
 import codecs
 import appdb
@@ -19,7 +21,7 @@ def save_word(word):
     word_clear = word.replace("'", '')
     suffix = extract_suffix(word)
 
-    db.execute('''INSERT OR IGNORE INTO words (word, word_accent, suffix) VALUES (?, ?, ?)''', (word_clear, word_accent, suffix))
+    db.execute('''INSERT OR IGNORE INTO words (word, word_accent, suffix, count) VALUES (?, ?, ?, ?)''', (word_clear, word_accent, suffix, 0))
 
 def parse_dict():
     db.execute('BEGIN TRANSACTION')
