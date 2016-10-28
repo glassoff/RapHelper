@@ -374,7 +374,7 @@
 				DEVELOPMENT_TEAM = X5XRLT3ZW8;
 				INFOPLIST_FILE = RapHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = aviasales.RapHelperTest;
+				PRODUCT_BUNDLE_IDENTIFIER = aviasales.RapHelperTest1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "RapHelper/RapHelper-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -391,7 +391,7 @@
 				DEVELOPMENT_TEAM = X5XRLT3ZW8;
 				INFOPLIST_FILE = RapHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = aviasales.RapHelperTest;
+				PRODUCT_BUNDLE_IDENTIFIER = aviasales.RapHelperTest1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "RapHelper/RapHelper-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

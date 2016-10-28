@@ -34,7 +34,10 @@ class PhraseBuilder {
             word.accentText = result?.string(forColumn: "word_accent")
             word.text = result?.string(forColumn: "word")
             word.priority = result?.int(forColumn: "priority")
-            words.append(word)
+
+            if word.text.characters.count > 1 {
+                words.append(word)
+            }
         }
         
         result?.close()

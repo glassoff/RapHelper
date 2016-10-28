@@ -25,19 +25,20 @@ class RhythmGenerator: NSObject {
 
         let rhythmes = ["100", "010", "001", "0001", "0010", "0100", "1000", "01", "10"]
 
-        var goodRhythmes: [String] = []
+        var goodRhythmes: [(String, Int)] = []
 
         for rhythm in rhythmes {
-            if rhythmIsGood(syllables, rhythm: rhythm) {
-                goodRhythmes.append(rhythm)
+            let isGoodTuple = rhythmIsGood(syllables, rhythm: rhythm)
+            if isGoodTuple.0 {
+                goodRhythmes.append((rhythm, isGoodTuple.1))
             }
         }
 
-
-
         print(goodRhythmes)
 
-        let rhymeToReturnCharacters = (goodRhythmes.first ?? rhythmes.last!).characters.map{String($0)}
+        let goodRhythm = goodRhythmes.sorted(by: {$0.1 < $1.1}).first?.0 ?? rhythmes.last!
+
+        let rhymeToReturnCharacters = goodRhythm.characters.map{String($0)}
 
         var boolRhymeToReturn: [Bool] = []
 
@@ -50,10 +51,10 @@ class RhythmGenerator: NSObject {
             }
         }
 
-        return (boolRhymeToReturn, goodRhythmes.first ?? rhythmes.last!)
+        return (boolRhymeToReturn, goodRhythm)
     }
 
-    static func rhythmIsGood(_ syllables: [Bool?], rhythm rhythm_: String, startIndex: Int = 0, wholeText: Bool = true) -> Bool {
+    static func rhythmIsGood(_ syllables: [Bool?], rhythm rhythm_: String, startIndex: Int = 0, wholeText: Bool = true) -> (Bool, Int) {
         var rhythm = rhythm_
         for _ in 0..<startIndex {
             rhythm.append(rhythm.characters.first!)
@@ -63,10 +64,12 @@ class RhythmGenerator: NSObject {
         let rhythmToTestCharacters = rhythm.characters.map{String($0)}
 
         if wholeText && syllables.count/rhythmToTestCharacters.count < 2 {
-            return false
+            return (false, 1000)
         }
 
         var rhythmToTestIsGood = true
+
+        var ignoreCount = 0
 
         for (index, syllable) in syllables.enumerated() {
             if let syllable = syllable {
@@ -75,10 +78,13 @@ class RhythmGenerator: NSObject {
                     rhythmToTestIsGood = false
                     break
                 }
+                if testCharacter == "0" && syllable {
+                    ignoreCount += 1
+                }
             }
         }
 
-        return rhythmToTestIsGood
+        return (rhythmToTestIsGood, ignoreCount)
     }
 
     static func syllables(_ word: String) -> [Bool?] {

@@ -9,8 +9,9 @@ class FinalGenerator: NSObject {
 
         let ending = RhythmGenerator.ending(with: wholeText)
 
-        var bestRhymes = Array(RhymeFinder.find(ending).filter({RelevanceLogic.isRelevant($0.accentText!, forRhythm: rhythm, lastIndex: syllables.count - 1)}).filter({PhraseBuilder.findPreviousWords(forWord: $0.text!).count > 0}))
+        let lastRawWord = wholeText.components(separatedBy: "").last?.replacingOccurrences(of: "'", with: "")
 
+        var bestRhymes = Array(RhymeFinder.find(ending).filter({(lastRawWord != $0.text) && RelevanceLogic.isRelevant($0.accentText!, forRhythm: rhythm, lastIndex: syllables.count - 1)}).filter({PhraseBuilder.findPreviousWords(forWord: $0.text!).count > 0}))
 
         var textGenerated = false
         var appemptsCount = 0

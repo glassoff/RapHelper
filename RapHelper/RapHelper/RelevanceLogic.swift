@@ -13,6 +13,6 @@ class RelevanceLogic: NSObject {
             return false
         }
 
-        return RhythmGenerator.rhythmIsGood(syllables, rhythm: rhythm, startIndex: startIndex, wholeText: false)
+        return RhythmGenerator.rhythmIsGood(syllables, rhythm: rhythm, startIndex: startIndex, wholeText: false).0
     }
 }
