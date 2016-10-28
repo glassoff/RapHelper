@@ -17,10 +17,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        let rhymeFinder = RhymeFinder()
-        rhymeFinder.find(word: "одобрением")
-        
+        let testString = "Ве'дь мы' вы'ступаем си'льно, бу'дто че'люсть питека'нтропа"
+        let ending = RhythmGenerator.ending(with: testString)
+        RhymeFinder.find(ending, db: FMDatabase())
+
         YSKSpeechKit.sharedInstance().configure(withAPIKey: "9837dca0-7cc1-42ef-bd85-b2999b21ff60")
         
     }
