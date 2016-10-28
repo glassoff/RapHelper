@@ -61,7 +61,7 @@ class RhythmGenerator: NSObject {
             for (index, syllable) in syllables.enumerated() {
                 if let syllable = syllable {
                     let testCharacter = rhymeToTestCharacters[index % rhymeToTestCharacters.count]
-                    if testCharacter == "0" && syllable || testCharacter == "1" && !syllable {
+                    if testCharacter == "1" && !syllable {
                         rhymeToTestIsGood = false
                         break
                     }
