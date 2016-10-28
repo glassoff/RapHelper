@@ -19,7 +19,7 @@ def save_word(word, priority):
         return
 
     word_accent = word
-    word_clear = word.replace("'", '')
+    word_clear = word.replace("'", '').replace("`", '')
     suffix = extract_suffix(word)
 
     db.execute('''INSERT OR IGNORE INTO words (word, word_accent, suffix, count, priority) VALUES (?, ?, ?, ?, ?)''', (word_clear, word_accent, suffix, 0, priority))
