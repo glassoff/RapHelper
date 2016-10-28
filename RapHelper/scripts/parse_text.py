@@ -36,7 +36,7 @@ def process_line(line, result):
 
 def parse_file(fname):
     result = {}
-    with codecs.open(fname, 'r', 'cp1251') as f:
+    with codecs.open(fname, 'r', 'utf8') as f:
         for line in f:
             process_line(line, result)
     return result
@@ -64,16 +64,18 @@ def save_result_to_db(result):
                       'related_word_id': related_word_id,
                       'count': result[word].related[related_word]}
 
-            db.execute('''
-                INSERT OR IGNORE INTO related_words (word_id, related_word_id, count) VALUES (:word_id, :related_word_id, 0)''', params)
-            db.execute('''UPDATE related_words SET count = count + :count WHERE word_id = :word_id AND related_word_id = :related_word_id;
-                ''', params)
+            db.execute('INSERT OR IGNORE INTO related_words (word_id, related_word_id, count) VALUES (:word_id, :related_word_id, 0)', params)
+            db.execute('UPDATE related_words SET count = count + :count WHERE word_id = :word_id AND related_word_id = :related_word_id', params)
+
+            params = {'word_id': word_id,
+                       'count': result[word].count}
+            db.execute('UPDATE words SET count = count + :count where word_id = :word_id', params)
 
     db.execute('COMMIT')
     db.close()
 
 def main():
-    fname = sys.argv[1]
+    fname = sys.argv[1]    
     result = parse_file(fname)
     save_result_to_db(result)
 
