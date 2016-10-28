@@ -40,6 +40,7 @@ def parse_dict():
 def main():
     global db
     db = sqlite3.connect('words.db')
+    db.isolation_level = None
     create_db()
     parse_dict()
     db.close()    
