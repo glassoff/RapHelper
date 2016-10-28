@@ -25,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let rhyme = RhymeFinder.find(ending, db: db!)
 
+        let mustBeBad = RelevanceLogic.isRelevant("пи'дор", for: "01", lastIndex: 1)
+        let mustBeGood = RelevanceLogic.isRelevant("говно'", for: "01", lastIndex: 1)
+
         print(rhyme)
 
         return true

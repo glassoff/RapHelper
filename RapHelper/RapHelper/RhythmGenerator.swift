@@ -11,7 +11,7 @@ class RhythmGenerator: NSObject {
     static let accent = "'".characters.first!
     static let yo = "ё".characters.first!
 
-    static func rhythm(with string: String) -> [Bool] {
+    static func rhythm(with string: String) -> ([Bool], String) {
 
 
         let words = string.components(separatedBy: CharacterSet.whitespacesAndNewlines)
@@ -19,57 +19,16 @@ class RhythmGenerator: NSObject {
         var syllables: [Bool?] = []
 
         for word in words {
-            let onlyVowels = word.characters.filter{vowels.contains(String($0)) || $0 == "'"}
-
-            if onlyVowels.count == 1 {
-                syllables.append(nil)
-                continue
-            }
-
-            if onlyVowels.index(of: accent) == nil && onlyVowels.index(of: yo) == nil {
-                for _ in onlyVowels {
-                    syllables.append(nil)
-                }
-                continue
-            }
-
-            for vowel in onlyVowels {
-                if vowel == "ё" {
-                    syllables.append(true)
-                } else if vowel == accent {
-                    syllables.removeLast()
-                    syllables.append(true)
-                } else {
-                    syllables.append(false)
-                }
-            }
+            syllables.append(contentsOf: RhythmGenerator.syllables(word))
         }
 
         let rhythmes = ["0001", "0010", "0100", "1000", "100", "010", "001", "01", "10"]
 
         var goodRhythmes: [String] = []
 
-        for rhymeToTest in rhythmes {
-            let rhymeToTestCharacters = rhymeToTest.characters.map{String($0)}
-
-            if syllables.count/rhymeToTestCharacters.count < 2 {
-                continue
-            }
-
-            var rhymeToTestIsGood = true
-
-            for (index, syllable) in syllables.enumerated() {
-                if let syllable = syllable {
-                    let testCharacter = rhymeToTestCharacters[index % rhymeToTestCharacters.count]
-                    if testCharacter == "1" && !syllable {
-                        rhymeToTestIsGood = false
-                        break
-                    }
-                }
-            }
-
-            if rhymeToTestIsGood {
-                goodRhythmes.append(rhymeToTest)
+        for rhythm in rhythmes {
+            if rhythmIsGood(syllables, rhythm: rhythm) {
+                goodRhythmes.append(rhythm)
             }
         }
 
@@ -97,11 +56,71 @@ class RhythmGenerator: NSObject {
             }
         }
 
-        return boolRhymeToReturn
+        return (boolRhymeToReturn, goodRhythmes.first ?? rhythmes.last!)
+    }
+
+    static func rhythmIsGood(_ syllables: [Bool?], rhythm rhythm_: String, startIndex: Int = 0, wholeText: Bool = true) -> Bool {
+        var rhythm = rhythm_
+        for _ in 0..<startIndex {
+            rhythm.append(rhythm.characters.first!)
+            rhythm.characters.removeFirst()
+        }
+
+        let rhythmToTestCharacters = rhythm.characters.map{String($0)}
+
+        if wholeText && syllables.count/rhythmToTestCharacters.count < 2 {
+            return false
+        }
+
+        var rhythmToTestIsGood = true
+
+        for (index, syllable) in syllables.enumerated() {
+            if let syllable = syllable {
+                let testCharacter = rhythmToTestCharacters[index % rhythmToTestCharacters.count]
+                if testCharacter == "1" && !syllable {
+                    rhythmToTestIsGood = false
+                    break
+                }
+            }
+        }
+
+        return rhythmToTestIsGood
+    }
+
+    static func syllables(_ word: String) -> [Bool?] {
+
+        let onlyVowels = word.characters.filter{vowels.contains(String($0)) || $0 == "'"}
+
+        var syllables: [Bool?] = []
+
+        if onlyVowels.count == 1 {
+            syllables.append(nil)
+            return syllables
+        }
+
+        if onlyVowels.index(of: accent) == nil && onlyVowels.index(of: yo) == nil {
+            for _ in onlyVowels {
+                syllables.append(nil)
+            }
+            return syllables
+        }
+
+        for vowel in onlyVowels {
+            if vowel == "ё" {
+                syllables.append(true)
+            } else if vowel == accent {
+                syllables.removeLast()
+                syllables.append(true)
+            } else {
+                syllables.append(false)
+            }
+        }
+
+        return syllables
     }
 
     static func ending(with fullText: String) -> String {
-        let rhyme = rhythm(with: fullText)
+        let rhyme = rhythm(with: fullText).0
 
         let lastOneInvertedIndex: Int = rhyme.reversed().index(of: true)!
 
