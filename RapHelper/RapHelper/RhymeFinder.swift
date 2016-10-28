@@ -2,18 +2,23 @@ import Foundation
 
 class RhymeFinder {
     
-    static func find(_ word: String, db: FMDatabase) -> String {
-        let rs = try! db.executeQuery("SELECT * FROM words where suffix = \"\(word)\"", values: nil)
-        var rhymes: [String] = []
-        while rs.next() {
-            if let x = rs.string(forColumn: "word") {
-                rhymes.append(x)
-            }
+    static func find(_ word: String) -> [Word] {
+        let db = (UIApplication.shared.delegate as! AppDelegate).db
+
+        let result = try! db!.executeQuery("SELECT * FROM words where suffix = \"\(word)\"", values: nil)
+
+        var words = [Word]()
+
+        while result.next() == true {
+            let word = Word()
+            word.accentText = result.string(forColumn: "word_accent")
+            word.text = result.string(forColumn: "word")
+            word.priority = result.int(forColumn: "priority")
+            words.append(word)
         }
 
-        let bestRhyme = BeautyLogic.findBestWord(for: word, from: rhymes)
+        result.close()
 
-        return word
+        return words
     }
-    
 }

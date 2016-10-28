@@ -33,7 +33,7 @@ class BeautyLogic: NSObject {
                               "ф" : 0.040,
                               "э" : 0.017]
 
-    static func findBestWord(for phrase: String, from strings: [String]) -> String {
+    static func findBestWord(for phrase: String, from strings: [Word]) -> Word {
         let phraseLetterKeys = frequencies.keys
 
         var phraseLetterFrequencies: [String : Double] = [:]
@@ -53,9 +53,9 @@ class BeautyLogic: NSObject {
             phraseLetterFrequencies[key] = phraseLetterFrequencies[key]! / frequencies[key]!
         }
 
-        let stringsTuples = strings.map { string -> (String, Double) in
+        let stringsTuples = strings.map { string -> (Word, Double) in
             var totalWeight: Double = 0
-            for character in string.characters.map({String($0)}) {
+            for character in string.text!.characters.map({String($0)}) {
                 if let value = phraseLetterFrequencies[character] {
                     totalWeight += value
                 }
@@ -64,6 +64,6 @@ class BeautyLogic: NSObject {
             return (string, totalWeight)
             }.sorted(by: {$0.1 > $1.1})
 
-        return stringsTuples.first?.0 ?? ""
+        return stringsTuples.first?.0 ?? Word()
     }
 }

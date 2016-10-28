@@ -10,7 +10,7 @@ import Foundation
 
 class Accenter {
     
-    class func setAccents(inPhrase phraseWords: [String]) -> [String] {
+    class func setAccents(inPhrase phraseWords: [String]) -> [Word] {
         print(phraseWords)
         
         let db = (UIApplication.shared.delegate as! AppDelegate).db
@@ -19,29 +19,33 @@ class Accenter {
         
         let result = try! db?.executeQuery("SELECT word, word_accent FROM words WHERE word IN (\(wordsParams))", values: nil)
         
-        var resultWords = [String: String]()
-        
+        var resultWords = [String: Word]()
+
         while result?.next() == true {
-            let word = result?.string(forColumn: "word")
-            let wordAccent = result?.string(forColumn: "word_accent")
-            
-            resultWords[word!] = wordAccent
+            let word = Word()
+            word.accentText = result?.string(forColumn: "word_accent")
+            word.text = result?.string(forColumn: "word")
+            word.priority = result?.int(forColumn: "priority")
+            resultWords[word.text!] = word
         }
         
         result?.close()
         
-        var resultPhraseWords = [String]()
+        var resultPhraseWords = [Word]()
         
         for initialWord in phraseWords {
             if resultWords[initialWord] != nil {
                 resultPhraseWords.append(resultWords[initialWord]!)
             } else {
-                resultPhraseWords.append(initialWord)
+                let word = Word()
+                word.accentText = initialWord
+                word.text = initialWord
+                word.priority = 0
+
+                resultPhraseWords.append(word)
             }
         }
-        
-        print(resultPhraseWords)
-        
+
         return resultPhraseWords
     }
     
