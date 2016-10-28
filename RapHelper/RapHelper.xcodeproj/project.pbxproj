@@ -12,9 +12,12 @@
 		3A9414C41DC36646008BA064 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A9414C21DC36646008BA064 /* Main.storyboard */; };
 		3A9414C61DC36646008BA064 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A9414C51DC36646008BA064 /* Assets.xcassets */; };
 		3A9414C91DC36646008BA064 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A9414C71DC36646008BA064 /* LaunchScreen.storyboard */; };
+		3A9414D11DC36A17008BA064 /* RhymeFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9414D01DC36A17008BA064 /* RhymeFinder.swift */; };
+		5927FE2148ACBFF20C1316BB /* libPods-RapHelper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF43906E2A1B61DE2B4493F2 /* libPods-RapHelper.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		02BD01D4D788C3254DC36E7D /* Pods-RapHelper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RapHelper.release.xcconfig"; path = "Pods/Target Support Files/Pods-RapHelper/Pods-RapHelper.release.xcconfig"; sourceTree = "<group>"; };
 		3A9414BB1DC36646008BA064 /* RapHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RapHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A9414BE1DC36646008BA064 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A9414C01DC36646008BA064 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +25,9 @@
 		3A9414C51DC36646008BA064 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A9414C81DC36646008BA064 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A9414CA1DC36646008BA064 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A9414D01DC36A17008BA064 /* RhymeFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RhymeFinder.swift; sourceTree = "<group>"; };
+		F9F36362ACE9FDC4D32D6CB4 /* Pods-RapHelper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RapHelper.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RapHelper/Pods-RapHelper.debug.xcconfig"; sourceTree = "<group>"; };
+		FF43906E2A1B61DE2B4493F2 /* libPods-RapHelper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RapHelper.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5927FE2148ACBFF20C1316BB /* libPods-RapHelper.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +47,8 @@
 			children = (
 				3A9414BD1DC36646008BA064 /* RapHelper */,
 				3A9414BC1DC36646008BA064 /* Products */,
+				7727737F4E8B481A9705CD56 /* Pods */,
+				C2BC0311CCECDB951ECBF979 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,8 +69,26 @@
 				3A9414C51DC36646008BA064 /* Assets.xcassets */,
 				3A9414C71DC36646008BA064 /* LaunchScreen.storyboard */,
 				3A9414CA1DC36646008BA064 /* Info.plist */,
+				3A9414D01DC36A17008BA064 /* RhymeFinder.swift */,
 			);
 			path = RapHelper;
+			sourceTree = "<group>";
+		};
+		7727737F4E8B481A9705CD56 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F9F36362ACE9FDC4D32D6CB4 /* Pods-RapHelper.debug.xcconfig */,
+				02BD01D4D788C3254DC36E7D /* Pods-RapHelper.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C2BC0311CCECDB951ECBF979 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FF43906E2A1B61DE2B4493F2 /* libPods-RapHelper.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +98,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A9414CD1DC36646008BA064 /* Build configuration list for PBXNativeTarget "RapHelper" */;
 			buildPhases = (
+				E3E1150F3C0EEB68EE791C08 /* [CP] Check Pods Manifest.lock */,
 				3A9414B71DC36646008BA064 /* Sources */,
 				3A9414B81DC36646008BA064 /* Frameworks */,
 				3A9414B91DC36646008BA064 /* Resources */,
+				639BC98A1E78D91D8CBA573B /* [CP] Embed Pods Frameworks */,
+				1AEB310FE48A8C32B413CA73 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -131,11 +161,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1AEB310FE48A8C32B413CA73 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RapHelper/Pods-RapHelper-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		639BC98A1E78D91D8CBA573B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RapHelper/Pods-RapHelper-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E3E1150F3C0EEB68EE791C08 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		3A9414B71DC36646008BA064 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A9414D11DC36A17008BA064 /* RhymeFinder.swift in Sources */,
 				3A9414C11DC36646008BA064 /* ViewController.swift in Sources */,
 				3A9414BF1DC36646008BA064 /* AppDelegate.swift in Sources */,
 			);
@@ -256,6 +335,7 @@
 		};
 		3A9414CE1DC36646008BA064 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F9F36362ACE9FDC4D32D6CB4 /* Pods-RapHelper.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RapHelper/Info.plist;
@@ -268,6 +348,7 @@
 		};
 		3A9414CF1DC36646008BA064 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 02BD01D4D788C3254DC36E7D /* Pods-RapHelper.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RapHelper/Info.plist;
@@ -297,6 +378,7 @@
 				3A9414CF1DC36646008BA064 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
