@@ -73,6 +73,15 @@ class RhythmGenerator: NSObject {
             }
         }
 
+
+        if goodRhythmes.contains("0100") && goodRhythmes.contains("0001") && goodRhythmes.contains("01") {
+            goodRhythmes = ["01"]
+        }
+
+        if goodRhythmes.contains("1000") && goodRhythmes.contains("0010") && goodRhythmes.contains("10") {
+            goodRhythmes = ["10"]
+        }
+
         print(goodRhythmes)
 
         let rhymeToReturnCharacters = (goodRhythmes.first ?? rhythmes.last!).characters.map{String($0)}
