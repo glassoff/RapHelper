@@ -79,6 +79,11 @@ extension ViewController: YSKRecognizerDelegate {
         let accentedPhrase = Accenter.setAccents(inPhrase: words)
         
         textView.text = accentedPhrase.joined(separator: " ")
+        
+        
+        for word in words {
+            PhraseBuilder.findPreviousWords(forWord: word)
+        }
     }
     
 }
