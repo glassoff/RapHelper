@@ -75,7 +75,7 @@ def save_result_to_db(result):
     db.close()
 
 def main():
-    fname = sys.argv[1]
+    fname = sys.argv[1]    
     result = parse_file(fname)
     save_result_to_db(result)
 

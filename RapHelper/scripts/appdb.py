@@ -1,7 +1,7 @@
 import sqlite3
 
 def create_db(db):
-    db.execute('''CREATE TABLE IF NOT EXISTS words (word_id INTEGER PRIMARY KEY, word text UNIQUE, word_accent text, suffix text, count INTEGER) ''')
+    db.execute('''CREATE TABLE IF NOT EXISTS words (word_id INTEGER PRIMARY KEY, word text UNIQUE, word_accent text, suffix text, count INTEGER, priority INTEGER) ''')
     db.execute('''CREATE TABLE IF NOT EXISTS related_words (word_id INTEGER, related_word_id INTEGER, count INTEGER, PRIMARY KEY (word_id, related_word_id))''')
     db.commit()
 
