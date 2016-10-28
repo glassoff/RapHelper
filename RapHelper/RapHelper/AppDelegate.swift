@@ -12,10 +12,13 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var db: FMDatabase?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        setupDb()
+        
         return true
     }
 
@@ -41,6 +44,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    
+    func setupDb() {
+        let fileDbName = "words"
+        let fileDbExtension = "db"
+        
+        let baseURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+        let fileDbURL = baseURL.appendingPathComponent(fileDbName + "." + fileDbExtension)
+        
+        if FileManager.default.fileExists(atPath: fileDbURL.path) == false {
+            let fileURLInBundle = Bundle.main.url(forResource: fileDbName, withExtension: fileDbExtension)
+            try! FileManager.default.copyItem(at: fileURLInBundle!, to: fileDbURL)
+        }
+        
+        guard let db = FMDatabase(path: fileDbURL.path) else {
+            print("unable to create database")
+            return
+        }
+        
+        guard db.open() else {
+            print("Unable to open database")
+            return
+        }
+        
+        self.db = db
+    }
 
 }
 

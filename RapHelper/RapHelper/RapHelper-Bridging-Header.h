@@ -3,3 +3,4 @@
 //
 
 #import <YandexSpeechKit/SpeechKit.h>
+#import "FMDB.h"

@@ -12,9 +12,10 @@
 		3A9414C41DC36646008BA064 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A9414C21DC36646008BA064 /* Main.storyboard */; };
 		3A9414C61DC36646008BA064 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A9414C51DC36646008BA064 /* Assets.xcassets */; };
 		3A9414C91DC36646008BA064 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A9414C71DC36646008BA064 /* LaunchScreen.storyboard */; };
-		6F45C31C1DC36EA800845FEB /* RhythmGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F45C31B1DC36EA800845FEB /* RhythmGenerator.swift */; };
 		3A9414D11DC36A17008BA064 /* RhymeFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9414D01DC36A17008BA064 /* RhymeFinder.swift */; };
+		3A9414D91DC38F08008BA064 /* words.db in Resources */ = {isa = PBXBuildFile; fileRef = 3A9414D81DC38F08008BA064 /* words.db */; };
 		5927FE2148ACBFF20C1316BB /* libPods-RapHelper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF43906E2A1B61DE2B4493F2 /* libPods-RapHelper.a */; };
+		6F45C31C1DC36EA800845FEB /* RhythmGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F45C31B1DC36EA800845FEB /* RhythmGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,9 +27,10 @@
 		3A9414C51DC36646008BA064 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A9414C81DC36646008BA064 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A9414CA1DC36646008BA064 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6F45C31B1DC36EA800845FEB /* RhythmGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RhythmGenerator.swift; sourceTree = "<group>"; };
 		3A9414D01DC36A17008BA064 /* RhymeFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RhymeFinder.swift; sourceTree = "<group>"; };
 		3A9414D41DC372CA008BA064 /* RapHelper-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RapHelper-Bridging-Header.h"; sourceTree = "<group>"; };
+		3A9414D81DC38F08008BA064 /* words.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = words.db; path = scripts/words.db; sourceTree = SOURCE_ROOT; };
+		6F45C31B1DC36EA800845FEB /* RhythmGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RhythmGenerator.swift; sourceTree = "<group>"; };
 		F9F36362ACE9FDC4D32D6CB4 /* Pods-RapHelper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RapHelper.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RapHelper/Pods-RapHelper.debug.xcconfig"; sourceTree = "<group>"; };
 		FF43906E2A1B61DE2B4493F2 /* libPods-RapHelper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RapHelper.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -66,6 +68,7 @@
 		3A9414BD1DC36646008BA064 /* RapHelper */ = {
 			isa = PBXGroup;
 			children = (
+				3A9414D81DC38F08008BA064 /* words.db */,
 				3A9414BE1DC36646008BA064 /* AppDelegate.swift */,
 				6F45C31B1DC36EA800845FEB /* RhythmGenerator.swift */,
 				3A9414C01DC36646008BA064 /* ViewController.swift */,
@@ -163,6 +166,7 @@
 				3A9414C91DC36646008BA064 /* LaunchScreen.storyboard in Resources */,
 				3A9414C61DC36646008BA064 /* Assets.xcassets in Resources */,
 				3A9414C41DC36646008BA064 /* Main.storyboard in Resources */,
+				3A9414D91DC38F08008BA064 /* words.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
