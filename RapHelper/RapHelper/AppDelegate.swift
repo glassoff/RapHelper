@@ -19,16 +19,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setupDb()
 
-        let testString = "Ве'дь мы' вы'ступаем си'льно, бу'дто че'люсть питека'нтропа"
+//        let testString = "Ве'дь мы' вы'ступаем си'льно, бу'дто че'люсть питека'нтропа"
+//
+//        let ending = RhythmGenerator.ending(with: testString)
+//
+//        let rhyme = RhymeFinder.find(ending, db: db!)
+//
+//        let mustBeBad = RelevanceLogic.isRelevant("пи'дор", for: "01", lastIndex: 1)
+//        let mustBeGood = RelevanceLogic.isRelevant("говно'", for: "01", lastIndex: 1)
+//
+//        let hor = RhythmGenerator.rhythm(with: "Бу'ря мгло'ю не'бо кро'ет, Ви'хри сне'жные крутя'")
+//        let ymb = RhythmGenerator.rhythm(with: "Волчи'ца ты! Тебя' я презира'ю!")
+//        let ana = RhythmGenerator.rhythm(with: "Есть в напе'вах твои'х сокрове'нных")
+//        let dak = RhythmGenerator.rhythm(with: "Ту'чки небе'сные, ве'чные стра'нники")
+//        let amf = RhythmGenerator.rhythm(with: "Доро'же отчи'зны — не зна'л ничего'")
 
-        let ending = RhythmGenerator.ending(with: testString)
-
-        let rhyme = RhymeFinder.find(ending, db: db!)
-
-        let mustBeBad = RelevanceLogic.isRelevant("пи'дор", for: "01", lastIndex: 1)
-        let mustBeGood = RelevanceLogic.isRelevant("говно'", for: "01", lastIndex: 1)
-
-        print(rhyme)
+//        print(rhyme)
 
         return true
     }

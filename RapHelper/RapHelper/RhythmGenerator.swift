@@ -14,12 +14,13 @@ class RhythmGenerator: NSObject {
     static func rhythm(with string: String) -> ([Bool], String) {
 
 
-        let words = string.components(separatedBy: CharacterSet.whitespacesAndNewlines)
+        let words = string.lowercased().components(separatedBy: CharacterSet.whitespacesAndNewlines)
 
         var syllables: [Bool?] = []
 
         for word in words {
-            syllables.append(contentsOf: RhythmGenerator.syllables(word))
+            let wordSyllables = RhythmGenerator.syllables(word)
+            syllables.append(contentsOf: wordSyllables)
         }
 
         let rhythmes = ["0001", "0010", "0100", "1000", "100", "010", "001", "01", "10"]
@@ -89,7 +90,7 @@ class RhythmGenerator: NSObject {
 
     static func syllables(_ word: String) -> [Bool?] {
 
-        let onlyVowels = word.characters.filter{vowels.contains(String($0)) || $0 == "'"}
+        let onlyVowels = word.lowercased().characters.filter{vowels.contains(String($0)) || $0 == "'"}
 
         var syllables: [Bool?] = []
 
