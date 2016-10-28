@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 extension Array where Element: Equatable {
 
     // Remove first collection element that is equal to the given `object`:
@@ -18,6 +17,12 @@ extension Array where Element: Equatable {
         }
     }
 }
+
+let normalButtonColor = UIColor.green
+let activeButtonColor = UIColor.purple
+
+let normalButtonText = "Нажми"
+let activeButtonText = "Зачитай"
 
 class ViewController: UIViewController {
     
@@ -31,22 +36,30 @@ class ViewController: UIViewController {
                 
         YSKSpeechKit.sharedInstance().configure(withAPIKey: "9837dca0-7cc1-42ef-bd85-b2999b21ff60")
         
+        recordButton.backgroundColor = normalButtonColor
+        recordButton.setTitle(normalButtonText, for: .normal)
+        recordButton.setTitle(activeButtonText, for: .selected)
+        recordButton.setTitle(activeButtonText, for: .highlighted)
+        
+        recordButton.layer.cornerRadius = 50.0
+        recordButton.layer.masksToBounds = true
+        recordButton.layer.borderWidth = 1
+        recordButton.layer.borderColor = UIColor.gray.cgColor
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
-    @IBAction func recognizeBtnAction(_ sender: AnyObject) {
+    @IBAction func recognizeButtonTouchStart(_ sender: AnyObject) {
         recognizer = YSKRecognizer(language: YSKRecognitionLanguageRussian, model: YSKRecognitionModelFreeform)
         recognizer?.delegate = self
-        recognizer?.isVADEnabled = true
+        recognizer?.isVADEnabled = false
         
         recognizer?.start()
         
-        recordButton.backgroundColor = UIColor.green
+        recordButton.backgroundColor = activeButtonColor
+    }
+
+    @IBAction func recognizeBtnAction(_ sender: AnyObject) {
+        recordButton.isHighlighted = true
+        recognizer?.finishRecording()
     }
     
 }
@@ -60,7 +73,7 @@ extension ViewController: YSKRecognizerDelegate {
     func recognizer(_ recognizer: YSKRecognizer!, didFailWithError error: Error!) {
         print("ERROR!")
         
-        recordButton.backgroundColor = UIColor.clear
+        recordButton.backgroundColor = normalButtonColor
     }
     
     func recognizerDidDetectSpeech(_ recognizer: YSKRecognizer!) {
@@ -72,7 +85,8 @@ extension ViewController: YSKRecognizerDelegate {
     }
     
     func recognizer(_ recognizer: YSKRecognizer!, didCompleteWithResults results: YSKRecognition!) {
-        recordButton.backgroundColor = UIColor.clear
+        recordButton.backgroundColor = normalButtonColor
+        recordButton.isHighlighted = false
         
         guard results.hypotheses.count > 0 else {
             return
@@ -91,9 +105,15 @@ extension ViewController: YSKRecognizerDelegate {
 
         textView.text = words.joined(separator: " ")
 
-        let wholeText = accentedPhrase.map({$0.accentText!}).joined(separator: " ")
-
-        textView.text.append("\n")
-        textView.text.append(FinalGenerator.generateFinalString(for: wholeText))
+        DispatchQueue.global().async {
+            let wholeText = accentedPhrase.map({$0.accentText!}).joined(separator: " ")
+            let finalString =  FinalGenerator.generateFinalString(for: wholeText)
+            
+            DispatchQueue.main.async {
+                self.textView.text.append("\n")
+                self.textView.text.append(finalString)
+            }
+        }
+        
     }
 }

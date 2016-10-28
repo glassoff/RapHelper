@@ -13,11 +13,14 @@ class Accenter {
     class func setAccents(inPhrase phraseWords: [String]) -> [Word] {
         print(phraseWords)
         
-        let db = (UIApplication.shared.delegate as! AppDelegate).db
+        let dbQueue = (UIApplication.shared.delegate as! AppDelegate).dbQueue
         
         let wordsParams = "'" + phraseWords.joined(separator: "', '") + "'"
         
-        let result = try! db?.executeQuery("SELECT word, word_accent FROM words WHERE word IN (\(wordsParams))", values: nil)
+        var result: FMResultSet?
+        dbQueue?.inDatabase({ (db) in
+            result = try! db?.executeQuery("SELECT word, word_accent FROM words WHERE word IN (\(wordsParams))", values: nil)
+        })
         
         var resultWords = [String: Word]()
 
