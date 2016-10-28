@@ -3,10 +3,12 @@ import UIKit
 class RhythmGenerator: NSObject {
 
     static func rhythm(with string: String) -> [Bool] {
+
         let vowelsStr = "а, о, э, и, у, ы, е, ё, ю, я"
         let vowels = vowelsStr.components(separatedBy: ", ")
 
         let accent = "'".characters.first!
+        let yo = "ё".characters.first!
 
         let words = string.components(separatedBy: CharacterSet.whitespacesAndNewlines)
 
@@ -19,7 +21,14 @@ class RhythmGenerator: NSObject {
                 syllables.append(nil)
                 continue
             }
-            // TODO: добавить логику для односложных слов
+
+            if onlyVowels.index(of: accent) == nil && onlyVowels.index(of: yo) == nil {
+                for _ in onlyVowels {
+                    syllables.append(nil)
+                }
+                continue
+            }
+
             for vowel in onlyVowels {
                 if vowel == "ё" {
                     syllables.append(true)
@@ -54,11 +63,13 @@ class RhythmGenerator: NSObject {
                     }
                 }
             }
-
+            
             if rhymeToTestIsGood {
                 goodRhythmes.append(rhymeToTest)
             }
         }
+        
+        print(goodRhythmes)
         
         let rhymeToReturnCharacters = (goodRhythmes.first ?? rhythmes.last!).characters.map{String($0)}
         
@@ -72,7 +83,7 @@ class RhythmGenerator: NSObject {
                 boolRhymeToReturn.append(true)
             }
         }
-
+        
         return boolRhymeToReturn
     }
 }
