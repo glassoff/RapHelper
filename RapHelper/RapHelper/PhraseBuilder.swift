@@ -8,10 +8,14 @@
 
 import Foundation
 
-class Word {
+class Word: Equatable {
     var text: String!
     var accentText: String!
     var priority: Int32!
+
+    public static func ==(lhs: Word, rhs: Word) -> Bool {
+        return lhs.accentText == rhs.accentText
+    }
 }
 
 class PhraseBuilder {

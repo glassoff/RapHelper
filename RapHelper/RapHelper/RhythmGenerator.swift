@@ -23,7 +23,7 @@ class RhythmGenerator: NSObject {
             syllables.append(contentsOf: wordSyllables)
         }
 
-        let rhythmes = ["0001", "0010", "0100", "1000", "100", "010", "001", "01", "10"]
+        let rhythmes = ["100", "010", "001", "0001", "0010", "0100", "1000", "01", "10"]
 
         var goodRhythmes: [String] = []
 
@@ -34,13 +34,6 @@ class RhythmGenerator: NSObject {
         }
 
 
-        if goodRhythmes.contains("0100") && goodRhythmes.contains("0001") && goodRhythmes.contains("01") {
-            goodRhythmes = ["01"]
-        }
-
-        if goodRhythmes.contains("1000") && goodRhythmes.contains("0010") && goodRhythmes.contains("10") {
-            goodRhythmes = ["10"]
-        }
 
         print(goodRhythmes)
 
