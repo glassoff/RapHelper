@@ -2,13 +2,16 @@ PODS:
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
+  - YandexSpeechKit (2.5.0)
 
 DEPENDENCIES:
   - FMDB (~> 2.6)
+  - YandexSpeechKit (= 2.5.0)
 
 SPEC CHECKSUMS:
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
+  YandexSpeechKit: 4c0ee53139175bebef965dfa858044dc7c14b0b9
 
-PODFILE CHECKSUM: 970c416b5840cb4a5d8e3d9968e8050842283d7b
+PODFILE CHECKSUM: 0483e74466101b67d71096bcc8ebed9a9544dbb3
 
 COCOAPODS: 1.0.1

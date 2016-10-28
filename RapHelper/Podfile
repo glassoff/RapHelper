@@ -1,3 +1,4 @@
 target 'RapHelper' do
     pod 'FMDB', '~> 2.6'
+    pod 'YandexSpeechKit', '2.5.0'
 end

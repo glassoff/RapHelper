@@ -1,0 +1,1 @@
+../../../../YandexSpeechKit/YandexSpeechKit.framework/Versions/A/Headers/YSKRecognizerDelegate.h

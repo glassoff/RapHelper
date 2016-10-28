@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,17 +19,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NE8-tk-d9t">
-                                <frame key="frameInset" minX="117" minY="597" width="141" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NE8-tk-d9t">
                                 <state key="normal" title="ПОШУМИМ БЛЯДЬ!"/>
+                                <connections>
+                                    <action selector="recognizeBtnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7ww-oi-NJq"/>
+                                </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kCi-Px-L4f">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="kCi-Px-L4f" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="97A-Fh-tSx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="kCi-Px-L4f" secondAttribute="trailing" constant="10" id="CWc-AQ-HBl"/>
+                            <constraint firstItem="NE8-tk-d9t" firstAttribute="top" secondItem="kCi-Px-L4f" secondAttribute="bottom" constant="100" id="I5F-4z-Ggv"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="NE8-tk-d9t" secondAttribute="bottom" constant="40" id="VIS-Xg-vCR"/>
+                            <constraint firstItem="NE8-tk-d9t" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eg3-r0-K4M"/>
+                            <constraint firstItem="kCi-Px-L4f" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="evJ-ke-H9k"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="recordButton" destination="NE8-tk-d9t" id="5mL-gr-yw8"/>
+                        <outlet property="textView" destination="kCi-Px-L4f" id="rvZ-KN-u1a"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
         </scene>
     </scenes>
 </document>
