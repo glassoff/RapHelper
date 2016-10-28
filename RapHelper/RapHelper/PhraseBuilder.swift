@@ -26,25 +26,26 @@ class PhraseBuilder {
         let sql = "SELECT * FROM words WHERE word_id IN (SELECT related_word_id FROM related_words WHERE word_id = (SELECT word_id FROM words WHERE word = '\(word)') ORDER BY count)"
         
         var result: FMResultSet?
+
+        var words = [Word]()
+
         dbQueue?.inDatabase({ (db) in
             result = try! db?.executeQuery(sql, values: nil)
+
+            while result?.next() == true {
+                let word = Word()
+                word.accentText = result?.string(forColumn: "word_accent")
+                word.text = result?.string(forColumn: "word")
+                word.priority = result?.int(forColumn: "priority")
+
+                if word.text.characters.count > 1 {
+                    words.append(word)
+                }
+            }
+            
+            result?.close()
         })
         
-        var words = [Word]()
-        
-        while result?.next() == true {
-            let word = Word()
-            word.accentText = result?.string(forColumn: "word_accent")
-            word.text = result?.string(forColumn: "word")
-            word.priority = result?.int(forColumn: "priority")
-
-            if word.text.characters.count > 1 {
-                words.append(word)
-            }
-        }
-        
-        result?.close()
-
         return words
     }
 

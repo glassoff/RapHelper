@@ -18,22 +18,23 @@ class Accenter {
         let wordsParams = "'" + phraseWords.joined(separator: "', '") + "'"
         
         var result: FMResultSet?
-        dbQueue?.inDatabase({ (db) in
-            result = try! db?.executeQuery("SELECT word, word_accent FROM words WHERE word IN (\(wordsParams))", values: nil)
-        })
-        
+
         var resultWords = [String: Word]()
 
-        while result?.next() == true {
-            let word = Word()
-            word.accentText = result?.string(forColumn: "word_accent")
-            word.text = result?.string(forColumn: "word")
-            word.priority = result?.int(forColumn: "priority")
-            resultWords[word.text!] = word
-        }
-        
-        result?.close()
-        
+        dbQueue?.inDatabase({ (db) in
+            result = try! db?.executeQuery("SELECT word, word_accent FROM words WHERE word IN (\(wordsParams))", values: nil)
+
+            while result?.next() == true {
+                let word = Word()
+                word.accentText = result?.string(forColumn: "word_accent")
+                word.text = result?.string(forColumn: "word")
+                word.priority = result?.int(forColumn: "priority")
+                resultWords[word.text!] = word
+            }
+
+            result?.close()
+        })
+
         var resultPhraseWords = [Word]()
         
         for initialWord in phraseWords {
