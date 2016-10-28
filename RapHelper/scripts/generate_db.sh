@@ -8,5 +8,6 @@ echo "Parsing fucks dictionary..."
 
 echo "Analize words usage..."
 ./parse_text.py "seed/voina.txt"
+./parse_text.py "seed/voina2.txt"
 
 echo "Done. See results in words.db"
