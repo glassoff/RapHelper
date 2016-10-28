@@ -2,7 +2,7 @@ import sqlite3
 import codecs
 
 def create_db():
-    db.execute('''CREATE TABLE IF NOT EXISTS words (word_id INTEGER PRIMARY KEY, word text, word_accent text, suffix text) ''')
+    db.execute('''CREATE TABLE IF NOT EXISTS words (word_id INTEGER PRIMARY KEY, word text UNIQUE, word_accent text, suffix text) ''')
     db.execute('''CREATE TABLE IF NOT EXISTS related_words (word_id INTEGER, related_word_id INTEGER, count INTEGER)''')
     db.commit()
 
@@ -23,7 +23,7 @@ def save_word(word):
     word_clear = word.replace("'", '')
     suffix = extract_suffix(word)
 
-    db.execute('''INSERT INTO words (word, word_accent, suffix) VALUES (?, ?, ?)''', (word_clear, word_accent, suffix))
+    db.execute('''INSERT OR IGNORE INTO words (word, word_accent, suffix) VALUES (?, ?, ?)''', (word_clear, word_accent, suffix))
 
 def parse_dict():
     db.execute('BEGIN TRANSACTION')
