@@ -1,10 +1,6 @@
 import sqlite3
 import codecs
-
-def create_db():
-    db.execute('''CREATE TABLE IF NOT EXISTS words (word_id INTEGER PRIMARY KEY, word text UNIQUE, word_accent text, suffix text) ''')
-    db.execute('''CREATE TABLE IF NOT EXISTS related_words (word_id INTEGER, related_word_id INTEGER, count INTEGER)''')
-    db.commit()
+import appdb
 
 def extract_suffix(word):
     index = word.find("'")
@@ -39,11 +35,10 @@ def parse_dict():
 
 def main():
     global db
-    db = sqlite3.connect('words.db')
-    db.isolation_level = None
-    create_db()
+    db = appdb.connect()
+    appdb.create_db(db)
     parse_dict()
-    db.close()    
+    db.close()
 
 
 if __name__ == '__main__':
