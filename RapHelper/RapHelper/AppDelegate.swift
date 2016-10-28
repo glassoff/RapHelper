@@ -18,7 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         setupDb()
-        
+
+        let testString = "Ве'дь мы' вы'ступаем си'льно, бу'дто че'люсть питека'нтропа"
+
+        let ending = RhythmGenerator.ending(with: testString)
+
+        let rhyme = RhymeFinder.find(ending, db: db!)
+
+//        SELECT * FROM words where suffix = "антропа"
+
         return true
     }
 
