@@ -36,7 +36,7 @@ def process_line(line, result):
 
 def parse_file(fname):
     result = {}
-    with codecs.open(fname, 'r', 'cp1251') as f:
+    with codecs.open(fname, 'r', 'utf8') as f:
         for line in f:
             process_line(line, result)
     return result
