@@ -2,7 +2,7 @@ import UIKit
 
 class FinalGenerator: NSObject {
 
-    static func generateFinalString(for wholeText: String) -> String {
+    static func generateFinalString(for wholeText: String, canTryNonInsureSyllable: Bool = true) -> String {
         let rhythmTuple = RhythmGenerator.rhythm(with: wholeText)
         let rhythm = rhythmTuple.1
         let syllables = rhythmTuple.0
@@ -42,7 +42,11 @@ class FinalGenerator: NSObject {
             } else {
                 var lastWord = bestRhyme
                 while syllablesToFill > 0 {
-                    var previousWords = PhraseBuilder.findPreviousWords(forWord: lastWord.text!).filter({(RhythmGenerator.syllables($0.accentText!).count <= syllablesToFill) && RelevanceLogic.isRelevant($0.accentText!, forRhythm: rhythm, lastIndex: syllablesToFill - 1) && PhraseBuilder.findPreviousWords(forWord: $0.text!).count > 0})
+                    var previousWords = PhraseBuilder.findPreviousWords(forWord: lastWord.text!).filter({
+                        !(canTryNonInsureSyllable && (RhythmGenerator.syllableInsurance($0.accentText) <= 0)
+                        && RhythmGenerator.syllables($0.accentText!).count <= syllablesToFill)
+                        && RelevanceLogic.isRelevant($0.accentText!, forRhythm: rhythm, lastIndex: syllablesToFill - 1)
+                        && PhraseBuilder.findPreviousWords(forWord: $0.text!).count > 0})
                     if previousWords.count == 0 {
                         bestRhymes = bestRhymes.filter({$0 != bestRhyme})
 
@@ -76,6 +80,6 @@ class FinalGenerator: NSObject {
             appemptsCount += 1
         }
 
-        return textGenerated ? newWords.map({$0.text}).joined(separator: " ") : "не получилось зачитать, сорь"
+        return textGenerated ? newWords.map({$0.text}).joined(separator: " ") : canTryNonInsureSyllable ? generateFinalString(for: wholeText, canTryNonInsureSyllable: false) : "не получилось зачитать, сорь"
     }
 }

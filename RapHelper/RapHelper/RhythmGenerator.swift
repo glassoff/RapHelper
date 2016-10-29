@@ -87,6 +87,15 @@ class RhythmGenerator: NSObject {
         return (rhythmToTestIsGood, ignoreCount)
     }
 
+    static func syllableInsurance(_ word: String) -> Int {
+        let syllables = RhythmGenerator.syllables(word)
+
+        if let _ = syllables.first {
+            return 0
+        }
+        return syllables.count + 1
+    }
+
     static func syllables(_ word: String) -> [Bool?] {
 
         let onlyVowels = word.lowercased().characters.filter{vowels.contains(String($0)) || $0 == "'"}

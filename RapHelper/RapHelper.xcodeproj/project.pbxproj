@@ -149,7 +149,7 @@
 				TargetAttributes = {
 					3A9414BA1DC36646008BA064 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 3KL55NL78D;
+						DevelopmentTeam = X5XRLT3ZW8;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
@@ -371,10 +371,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 3KL55NL78D;
+				DEVELOPMENT_TEAM = X5XRLT3ZW8;
 				INFOPLIST_FILE = RapHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = aviasales.RapHelper;
+				PRODUCT_BUNDLE_IDENTIFIER = aviasales.RapHelperTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "RapHelper/RapHelper-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -388,10 +388,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 3KL55NL78D;
+				DEVELOPMENT_TEAM = X5XRLT3ZW8;
 				INFOPLIST_FILE = RapHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = aviasales.RapHelper;
+				PRODUCT_BUNDLE_IDENTIFIER = aviasales.RapHelperTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "RapHelper/RapHelper-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

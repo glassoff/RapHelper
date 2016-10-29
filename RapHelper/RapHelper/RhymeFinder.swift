@@ -53,7 +53,7 @@ class RhymeFinder {
             result.append(sampleChars)
         }
 
-        return result
+        return Array(Set(result))
     }
 
     private static func tryToFind(_ word: String) -> [Word] {
