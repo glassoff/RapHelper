@@ -45,6 +45,8 @@ class ViewController: UIViewController {
         recordButton.layer.masksToBounds = true
         recordButton.layer.borderWidth = 1
         recordButton.layer.borderColor = UIColor.gray.cgColor
+        
+        textView.delegate = self
     }
 
     @IBAction func recognizeButtonTouchStart(_ sender: AnyObject) {
@@ -62,6 +64,21 @@ class ViewController: UIViewController {
         recognizer?.finishRecording()
     }
     
+    func recognize(phrase words: [String]) {
+        let accentedPhrase = Accenter.setAccents(inPhrase: words)
+        
+        textView.text = words.joined(separator: " ")
+        
+        DispatchQueue.global().async {
+            let wholeText = accentedPhrase.map({$0.accentText!}).joined(separator: " ")
+            let finalString =  FinalGenerator.generateFinalString(for: wholeText)
+            
+            DispatchQueue.main.async {
+                self.textView.text.append("\n")
+                self.textView.text.append(finalString)
+            }
+        }
+    }
 }
 
 extension ViewController: YSKRecognizerDelegate {
@@ -101,19 +118,11 @@ extension ViewController: YSKRecognizerDelegate {
             words.append(word.text)
         }
         
-        let accentedPhrase = Accenter.setAccents(inPhrase: words)
-
-        textView.text = words.joined(separator: " ")
-
-        DispatchQueue.global().async {
-            let wholeText = accentedPhrase.map({$0.accentText!}).joined(separator: " ")
-            let finalString =  FinalGenerator.generateFinalString(for: wholeText)
-            
-            DispatchQueue.main.async {
-                self.textView.text.append("\n")
-                self.textView.text.append(finalString)
-            }
-        }
+        recognize(phrase: words)
         
     }
+}
+
+extension ViewController: UITextViewDelegate {
+    
 }

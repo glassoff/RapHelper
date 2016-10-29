@@ -41,8 +41,8 @@
                         <constraints>
                             <constraint firstItem="kCi-Px-L4f" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="97A-Fh-tSx"/>
                             <constraint firstAttribute="trailingMargin" secondItem="kCi-Px-L4f" secondAttribute="trailing" constant="10" id="CWc-AQ-HBl"/>
-                            <constraint firstItem="NE8-tk-d9t" firstAttribute="top" secondItem="kCi-Px-L4f" secondAttribute="bottom" constant="100" id="I5F-4z-Ggv"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="NE8-tk-d9t" secondAttribute="bottom" constant="40" id="VIS-Xg-vCR"/>
+                            <constraint firstItem="NE8-tk-d9t" firstAttribute="top" secondItem="kCi-Px-L4f" secondAttribute="bottom" constant="50" id="b4W-2V-UyO"/>
                             <constraint firstItem="NE8-tk-d9t" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eg3-r0-K4M"/>
                             <constraint firstItem="kCi-Px-L4f" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="evJ-ke-H9k"/>
                         </constraints>
