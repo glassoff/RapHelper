@@ -33,7 +33,16 @@ class BeautyLogic: NSObject {
                               "ф" : 0.040,
                               "э" : 0.017]
 
-    static func findBestWord(for phrase: String, from strings: [Word]) -> Word {
+    static let vowelsStr = "а, о, э, и, у, ы, е, ё, ю, я"
+    static let vowels = vowelsStr.components(separatedBy: ", ")
+
+    static func findBestSoundWord(for phrase: String, from strings: [Word], lastIndex: Int) -> Word {
+        let stringsMatchTuples = strings.map({($0, LowelMatchLogic.lowelMatchPercent($0.text, forFullWord: phrase, lastIndex: lastIndex))}).sorted(by: {$0.1 > $1.1})
+
+        if Int(arc4random_uniform(3)) != 0 {
+            return stringsMatchTuples.first!.0
+        }
+
         let phraseLetterKeys = frequencies.keys
 
         var phraseLetterFrequencies: [String : Double] = [:]

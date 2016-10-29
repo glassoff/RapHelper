@@ -31,7 +31,7 @@ class FinalGenerator: NSObject {
         var newWords: [Word] = []
 
         while !textGenerated && appemptsCount < maxAppemptsCount {
-            let bestRhyme = BeautyLogic.findBestWord(for: wholeText, from: bestRhymes)  // TODO: different generate
+            let bestRhyme = BeautyLogic.findBestSoundWord(for: wholeText, from: bestRhymes, lastIndex: syllables.count - 1)
             guard bestRhyme.accentText != nil else {
                 break
             }
@@ -66,7 +66,7 @@ class FinalGenerator: NSObject {
                         previousWords = goodBeginningWords
                     }
                     // TODO: insert here word frequency!
-                    let bestWord = BeautyLogic.findBestWord(for: wholeText, from: previousWords)
+                    let bestWord = BeautyLogic.findBestSoundWord(for: wholeText, from: previousWords, lastIndex: syllablesToFill - 1)
                     lastWord = bestWord
                     newWords.insert(bestWord, at: 0)
                     syllablesToFill -= RhythmGenerator.syllables(bestWord.accentText!).count
@@ -80,6 +80,34 @@ class FinalGenerator: NSObject {
             appemptsCount += 1
         }
 
-        return textGenerated ? newWords.map({$0.text}).joined(separator: " ") : canTryNonInsureSyllable ? generateFinalString(for: wholeText, canTryNonInsureSyllable: false) : "не получилось зачитать, сорь"
+        var result = newWords.map({$0.text}).joined(separator: " ")
+
+        result.append("\n\n")
+        result.append(rhythmDescription(for: rhythm))
+
+        return textGenerated ? result : canTryNonInsureSyllable ? generateFinalString(for: wholeText, canTryNonInsureSyllable: false) : "не получилось зачитать, сорь"
+    }
+
+    static func rhythmDescription(for rhythm: String) -> String {
+        var result: String = "Читать "
+        if rhythm == "10" {
+            result.append("хореем")
+        } else if rhythm == "01" {
+            result.append("ямбом")
+        } else if rhythm == "001" {
+            result.append("анапестом")
+        } else if rhythm == "100" {
+            result.append("дактилем")
+        } else if rhythm == "010" {
+            result.append("амфибрахием")
+        } else {
+            result.append("четырёхстопником")
+        }
+
+        result.append(": ")
+
+        result.append(rhythm.replacingOccurrences(of: "0", with: "-").replacingOccurrences(of: "1", with: "!"))
+
+        return result
     }
 }

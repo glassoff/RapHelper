@@ -17,6 +17,7 @@
 		3A9414DB1DC3A042008BA064 /* Accenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9414DA1DC3A042008BA064 /* Accenter.swift */; };
 		3A9414DD1DC3C64E008BA064 /* PhraseBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9414DC1DC3C64E008BA064 /* PhraseBuilder.swift */; };
 		5927FE2148ACBFF20C1316BB /* libPods-RapHelper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF43906E2A1B61DE2B4493F2 /* libPods-RapHelper.a */; };
+		6F1860E01DC455DE009462B4 /* LowelMatchLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1860DF1DC455DE009462B4 /* LowelMatchLogic.swift */; };
 		6F1FA4111DC3BB27005A285C /* BeautyLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1FA4101DC3BB27005A285C /* BeautyLogic.swift */; };
 		6F1FA4131DC3BDA9005A285C /* RelevanceLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1FA4121DC3BDA9005A285C /* RelevanceLogic.swift */; };
 		6F45C31C1DC36EA800845FEB /* RhythmGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F45C31B1DC36EA800845FEB /* RhythmGenerator.swift */; };
@@ -37,6 +38,7 @@
 		3A9414D81DC38F08008BA064 /* words.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = words.db; path = scripts/words.db; sourceTree = SOURCE_ROOT; };
 		3A9414DA1DC3A042008BA064 /* Accenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Accenter.swift; sourceTree = "<group>"; };
 		3A9414DC1DC3C64E008BA064 /* PhraseBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhraseBuilder.swift; sourceTree = "<group>"; };
+		6F1860DF1DC455DE009462B4 /* LowelMatchLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LowelMatchLogic.swift; sourceTree = "<group>"; };
 		6F1FA4101DC3BB27005A285C /* BeautyLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeautyLogic.swift; sourceTree = "<group>"; };
 		6F1FA4121DC3BDA9005A285C /* RelevanceLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelevanceLogic.swift; sourceTree = "<group>"; };
 		6F45C31B1DC36EA800845FEB /* RhythmGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RhythmGenerator.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				3A9414D01DC36A17008BA064 /* RhymeFinder.swift */,
 				3A9414DA1DC3A042008BA064 /* Accenter.swift */,
 				6F1FA4101DC3BB27005A285C /* BeautyLogic.swift */,
+				6F1860DF1DC455DE009462B4 /* LowelMatchLogic.swift */,
 				6F1FA4121DC3BDA9005A285C /* RelevanceLogic.swift */,
 				3A9414DC1DC3C64E008BA064 /* PhraseBuilder.swift */,
 				6FDEB28D1DC4013300BB2BBC /* FinalGenerator.swift */,
@@ -244,6 +247,7 @@
 				6F45C31C1DC36EA800845FEB /* RhythmGenerator.swift in Sources */,
 				3A9414D11DC36A17008BA064 /* RhymeFinder.swift in Sources */,
 				3A9414DB1DC3A042008BA064 /* Accenter.swift in Sources */,
+				6F1860E01DC455DE009462B4 /* LowelMatchLogic.swift in Sources */,
 				6FDEB28E1DC4013300BB2BBC /* FinalGenerator.swift in Sources */,
 				3A9414C11DC36646008BA064 /* ViewController.swift in Sources */,
 				6F1FA4111DC3BB27005A285C /* BeautyLogic.swift in Sources */,
