@@ -137,8 +137,7 @@ class RhythmGenerator: NSObject {
             if currentVowelIndex >= vowelIndexToStart {
                 if currentVowelIndex == vowelIndexToStart && index >= onlyTextCharacters.count - 1 && index > 0 {
                     result.append(onlyTextCharacters[index-1])
-                }
-                if vowels.contains(character) || consonants.contains(character) {
+                } else if vowels.contains(character) || consonants.contains(character) {
                     result.append(character.characters.first!)
                 }
             }
