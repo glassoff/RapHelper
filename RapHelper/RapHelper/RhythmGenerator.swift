@@ -119,30 +119,38 @@ class RhythmGenerator: NSObject {
         return syllables
     }
 
-    static func ending(with fullText: String) -> String {
+    static func ending(with fullText: String) -> (String, Bool) {
         let rhyme = rhythm(with: fullText).0
 
         let lastOneInvertedIndex: Int = rhyme.reversed().index(of: true)!
 
         let vowelIndexToStart = (rhyme.count - lastOneInvertedIndex) - 1
+
         var result: String = ""
 
         var currentVowelIndex = -1
 
         let onlyTextCharacters = fullText.characters.map({String($0)}).filter({vowels.contains($0) || consonants.contains($0)})
+
+        var dontAddExtra = false
+        var didAddExtra = false
         for (index, character) in onlyTextCharacters.enumerated() {
             if vowels.contains(character) {
                 currentVowelIndex += 1
             }
+
             if currentVowelIndex >= vowelIndexToStart {
-                if currentVowelIndex == vowelIndexToStart && index >= onlyTextCharacters.count - 1 && index > 0 {
+                if currentVowelIndex == vowelIndexToStart && index == onlyTextCharacters.count - 1 && index > 0 && !dontAddExtra {
                     result.append(onlyTextCharacters[index-1])
-                } else if vowels.contains(character) || consonants.contains(character) {
+                    didAddExtra = true
+                }
+                if vowels.contains(character) || consonants.contains(character) {
                     result.append(character.characters.first!)
                 }
+                dontAddExtra = true
             }
         }
-        
-        return result
+
+        return (result, didAddExtra)
     }
 }

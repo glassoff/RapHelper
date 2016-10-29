@@ -11,7 +11,19 @@ class FinalGenerator: NSObject {
 
         let lastRawWord = wholeText.components(separatedBy: " ").filter({$0 != "."}).last?.replacingOccurrences(of: "'", with: "")
 
-        var bestRhymes = Array(RhymeFinder.find(ending).filter({(lastRawWord != $0.text) && RelevanceLogic.isRelevant($0.accentText!, forRhythm: rhythm, lastIndex: syllables.count - 1)}).filter({PhraseBuilder.findPreviousWords(forWord: $0.text!).count > 0}))
+        var bestRhymes = Array(RhymeFinder.find(ending.0).filter({(lastRawWord != $0.text) && RelevanceLogic.isRelevant($0.accentText!, forRhythm: rhythm, lastIndex: syllables.count - 1)}).filter({PhraseBuilder.findPreviousWords(forWord: $0.text!).count > 0}))
+
+        var canReduceEnding = ending.1
+
+        if bestRhymes.count == 0 && canReduceEnding {
+            canReduceEnding = false
+            var newChars = ending.0.characters
+            newChars.removeFirst()
+            let newEnding = String(newChars)
+
+            bestRhymes = Array(RhymeFinder.find(newEnding).filter({(lastRawWord != $0.text) && RelevanceLogic.isRelevant($0.accentText!, forRhythm: rhythm, lastIndex: syllables.count - 1)}).filter({PhraseBuilder.findPreviousWords(forWord: $0.text!).count > 0}))
+
+        }
 
         var textGenerated = false
         var appemptsCount = 0
@@ -33,6 +45,16 @@ class FinalGenerator: NSObject {
                     var previousWords = PhraseBuilder.findPreviousWords(forWord: lastWord.text!).filter({(RhythmGenerator.syllables($0.accentText!).count <= syllablesToFill) && RelevanceLogic.isRelevant($0.accentText!, forRhythm: rhythm, lastIndex: syllablesToFill - 1) && PhraseBuilder.findPreviousWords(forWord: $0.text!).count > 0})
                     if previousWords.count == 0 {
                         bestRhymes = bestRhymes.filter({$0 != bestRhyme})
+
+                        if bestRhymes.count == 0 && canReduceEnding {
+                            canReduceEnding = false
+                            var newChars = ending.0.characters
+                            newChars.removeFirst()
+                            let newEnding = String(newChars)
+
+                            bestRhymes = Array(RhymeFinder.find(newEnding).filter({(lastRawWord != $0.text) && RelevanceLogic.isRelevant($0.accentText!, forRhythm: rhythm, lastIndex: syllables.count - 1)}).filter({PhraseBuilder.findPreviousWords(forWord: $0.text!).count > 0}))
+
+                        }
                         break
                     }
                     let goodBeginningWords = previousWords.filter({(RhythmGenerator.syllables($0.accentText!).count == syllablesToFill) && PhraseBuilder.canBeInTheBeginning($0.text!)})

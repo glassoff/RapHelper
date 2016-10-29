@@ -1,6 +1,8 @@
 import Foundation
 
 class RhymeFinder {
+
+    // TODO: add same
     
     static func find(_ word: String) -> [Word] {
         let dbQueue = (UIApplication.shared.delegate as! AppDelegate).dbQueue
