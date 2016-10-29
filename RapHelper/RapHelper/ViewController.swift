@@ -51,6 +51,8 @@ class ViewController: UIViewController {
         
         textField.delegate = self
         
+        textField.addTarget(self, action: #selector(eventEditingChanged), for: .editingChanged)
+        
         textView.textColor = UIColor.white
         
         underTextView.layer.cornerRadius = 10
@@ -94,6 +96,7 @@ class ViewController: UIViewController {
         let accentedPhrase = Accenter.setAccents(inPhrase: normalizedWords)
         
         textView.text = normalizedWords.joined(separator: " ")
+        textView.text.append("\n ...")
         
         DispatchQueue.global().async {
             let wholeText = accentedPhrase.map({$0.accentText!}).joined(separator: " ")
@@ -103,6 +106,23 @@ class ViewController: UIViewController {
                 self.textView.text.append("\n")
                 self.textView.text.append(finalString)
             }
+        }
+    }
+    
+    func recognizeFromTextField() {
+        let string = textField.text!
+        
+        textView.text = string
+        
+        let words = string.components(separatedBy: " ")
+        recognize(phrase: words)
+    }
+    
+    @objc
+    public func eventEditingChanged(sender: UITextField) {
+        let range = textField.text?.range(of: "\u{FFFC}")
+        if range != nil {
+            recognizeFromTextField()
         }
     }
     
@@ -116,7 +136,7 @@ class ViewController: UIViewController {
     
     @objc
     public func keyboardDidHide(n: NSNotification) {
-        textFieldBottomConstraint.constant = 10
+        textFieldBottomConstraint.constant = 20
     }
 }
 
@@ -164,13 +184,14 @@ extension ViewController: YSKRecognizerDelegate {
 
 extension ViewController: UITextFieldDelegate {
     
-    
-    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        textView.text = string
-        
-        let words = string.components(separatedBy: " ")
-        recognize(phrase: words)
-        
-        return false
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        recognizeFromTextField()
+        textField.text = ""
+    }
+    
 }
