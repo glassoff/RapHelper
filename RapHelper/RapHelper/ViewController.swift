@@ -29,7 +29,9 @@ class ViewController: UIViewController {
     var recognizer: YSKRecognizer?
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var recordButton: UIButton!
-
+    @IBOutlet weak var textFieldBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var textField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -46,7 +48,14 @@ class ViewController: UIViewController {
         recordButton.layer.borderWidth = 1
         recordButton.layer.borderColor = UIColor.gray.cgColor
         
-        textView.delegate = self
+        textField.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     @IBAction func recognizeButtonTouchStart(_ sender: AnyObject) {
@@ -78,6 +87,19 @@ class ViewController: UIViewController {
                 self.textView.text.append(finalString)
             }
         }
+    }
+    
+    @objc
+    public func keyboardDidShow(n: NSNotification) {
+        let rectValue = n.userInfo?["UIKeyboardBoundsUserInfoKey"] as! NSValue
+        let rect = rectValue.cgRectValue
+        
+        textFieldBottomConstraint.constant = rect.size.height + 5
+    }
+    
+    @objc
+    public func keyboardDidHide(n: NSNotification) {
+        textFieldBottomConstraint.constant = 5
     }
 }
 
@@ -123,6 +145,13 @@ extension ViewController: YSKRecognizerDelegate {
     }
 }
 
-extension ViewController: UITextViewDelegate {
-    
+extension ViewController: UITextFieldDelegate {
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        textView.text = string
+        
+        let words = string.components(separatedBy: " ")
+        recognize(phrase: words)
+        
+        return false
+    }
 }
