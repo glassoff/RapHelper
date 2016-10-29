@@ -31,7 +31,7 @@ class FinalGenerator: NSObject {
         var newWords: [Word] = []
 
         while !textGenerated && appemptsCount < maxAppemptsCount {
-            let bestRhyme = BeautyLogic.findBestSoundWord(for: wholeText, from: bestRhymes, lastIndex: syllables.count - 1)
+            let bestRhyme = bestRhymes.count > 0 ? BeautyLogic.findBestSoundWord(for: wholeText, from: bestRhymes, lastIndex: syllables.count - 1) : Word()
             guard bestRhyme.accentText != nil else {
                 break
             }
