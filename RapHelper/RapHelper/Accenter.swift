@@ -9,7 +9,7 @@
 import Foundation
 
 class Accenter {
-    
+
     class func setAccents(inPhrase phraseWords: [String]) -> [Word] {
         print(phraseWords)
         

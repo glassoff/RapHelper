@@ -13,8 +13,9 @@ class RhythmGenerator: NSObject {
 
     static func rhythm(with string: String) -> ([Bool], String) {
 
+        let chSet = CharacterSet.init(charactersIn: vowelsStr + consonantStr + String(accent))
 
-        let words = string.lowercased().components(separatedBy: CharacterSet.whitespacesAndNewlines)
+        let words = string.lowercased().components(separatedBy: chSet.inverted)
 
         var syllables: [Bool?] = []
 
@@ -131,7 +132,9 @@ class RhythmGenerator: NSObject {
     static func ending(with fullText: String) -> (String, Bool) {
         let rhyme = rhythm(with: fullText).0
 
-        let lastOneInvertedIndex: Int = rhyme.reversed().index(of: true)!
+        guard let lastOneInvertedIndex: Int = rhyme.reversed().index(of: true) else {
+            return ("", false)
+        }
 
         let vowelIndexToStart = (rhyme.count - lastOneInvertedIndex) - 1
 

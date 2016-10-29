@@ -15,7 +15,7 @@ class RhymeFinder {
         
         let sortedWords = allWords.sorted(by: { (word1, word2) -> Bool in
             func sortK(word: Word) -> Int32 {
-                return word.count + 1000000 * word.priority
+                return word.count + 10000000 * word.priority
             }
             
             return sortK(word: word1) > sortK(word: word2)

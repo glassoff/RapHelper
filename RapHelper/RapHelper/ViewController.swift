@@ -25,7 +25,13 @@ let normalButtonText = "Нажми"
 let activeButtonText = "Зачитай"
 
 class ViewController: UIViewController {
-    
+
+    static let vowelsStr = "а, о, э, и, у, ы, е, ё, ю, я"
+    static let vowels = vowelsStr.components(separatedBy: ", ")
+
+    static let consonantStr = "б, в, г, д, ж, з, й, к, л, м, н, п, р, с, т, ф, х, ц, ч, ш, щ, ь, ъ"
+    static let consonants = consonantStr.components(separatedBy: ", ")
+
     var recognizer: YSKRecognizer?
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var recordButton: UIButton!
@@ -91,8 +97,7 @@ class ViewController: UIViewController {
     }
     
     func recognize(phrase words: [String]) {
-        let normalizedWords = words.map{ $0.lowercased() }
-        
+        let normalizedWords = words.map{ $0.lowercased().characters.map({String($0)}).filter({ViewController.vowels.contains($0) || ViewController.consonants.contains($0)}).joined() }
         let accentedPhrase = Accenter.setAccents(inPhrase: normalizedWords)
         
         textView.text = normalizedWords.joined(separator: " ")
