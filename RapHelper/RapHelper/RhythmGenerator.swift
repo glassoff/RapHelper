@@ -129,11 +129,15 @@ class RhythmGenerator: NSObject {
 
         var currentVowelIndex = -1
 
-        for character in fullText.characters.map({String($0)}) {
+        let onlyTextCharacters = fullText.characters.map({String($0)}).filter({vowels.contains($0) || consonants.contains($0)})
+        for (index, character) in onlyTextCharacters.enumerated() {
             if vowels.contains(character) {
                 currentVowelIndex += 1
             }
             if currentVowelIndex >= vowelIndexToStart {
+                if currentVowelIndex == vowelIndexToStart && index >= onlyTextCharacters.count - 1 && index > 0 {
+                    result.append(onlyTextCharacters[index-1])
+                }
                 if vowels.contains(character) || consonants.contains(character) {
                     result.append(character.characters.first!)
                 }

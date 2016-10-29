@@ -22,7 +22,7 @@ class Accenter {
         var resultWords = [String: Word]()
 
         dbQueue?.inDatabase({ (db) in
-            result = try! db?.executeQuery("SELECT word, word_accent FROM words WHERE word IN (\(wordsParams))", values: nil)
+            result = try! db?.executeQuery("SELECT * FROM words WHERE word IN (\(wordsParams))", values: nil)
 
             while result?.next() == true {
                 let word = Word()

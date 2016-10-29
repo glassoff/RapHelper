@@ -9,7 +9,7 @@ class FinalGenerator: NSObject {
 
         let ending = RhythmGenerator.ending(with: wholeText)
 
-        let lastRawWord = wholeText.components(separatedBy: "").last?.replacingOccurrences(of: "'", with: "")
+        let lastRawWord = wholeText.components(separatedBy: " ").filter({$0 != "."}).last?.replacingOccurrences(of: "'", with: "")
 
         var bestRhymes = Array(RhymeFinder.find(ending).filter({(lastRawWord != $0.text) && RelevanceLogic.isRelevant($0.accentText!, forRhythm: rhythm, lastIndex: syllables.count - 1)}).filter({PhraseBuilder.findPreviousWords(forWord: $0.text!).count > 0}))
 
@@ -54,6 +54,6 @@ class FinalGenerator: NSObject {
             appemptsCount += 1
         }
 
-        return newWords.map({$0.text}).joined(separator: " ")
+        return textGenerated ? newWords.map({$0.text}).joined(separator: " ") : "не получилось зачитать, сорь"
     }
 }

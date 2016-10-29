@@ -20,10 +20,10 @@ class Word: Equatable {
 
 class PhraseBuilder {
     
-    class func findPreviousWords(forWord word: String) -> [Word] {
+    class func findPreviousWords(forWord rawWord: String) -> [Word] {
         let dbQueue = (UIApplication.shared.delegate as! AppDelegate).dbQueue
 
-        let sql = "SELECT * FROM words WHERE word_id IN (SELECT related_word_id FROM related_words WHERE word_id = (SELECT word_id FROM words WHERE word = '\(word)') ORDER BY count)"
+        let sql = "SELECT * FROM words WHERE word_id IN (SELECT related_word_id FROM related_words WHERE word_id = (SELECT word_id FROM words WHERE word = '\(rawWord)') ORDER BY count)"
         
         var result: FMResultSet?
 
@@ -38,7 +38,7 @@ class PhraseBuilder {
                 word.text = result?.string(forColumn: "word")
                 word.priority = result?.int(forColumn: "priority")
 
-                if word.text.characters.count > 1 {
+                if word.text.characters.count > 1 && word.text != rawWord {
                     words.append(word)
                 }
             }
