@@ -12,8 +12,20 @@ class RhymeFinder {
         for ending in endingsToTry {
             allWords.append(contentsOf: tryToFind(ending))
         }
-
-        return allWords
+        
+        let sortedWords = allWords.sorted(by: { (word1, word2) -> Bool in
+            func sortK(word: Word) -> Int32 {
+                return word.count + 1000000 * word.priority
+            }
+            
+            return sortK(word: word1) > sortK(word: word2)
+        })
+        
+        if sortedWords.count > 20 {
+            return Array(sortedWords[0..<20])
+        } else {
+            return sortedWords
+        }
     }
 
     private static func allEndings(from ending: String) -> [String] {
@@ -71,6 +83,7 @@ class RhymeFinder {
                     word.accentText = result.string(forColumn: "word_accent")
                     word.text = result.string(forColumn: "word")
                     word.priority = result.int(forColumn: "priority")
+                    word.count = result.int(forColumn: "count")
                     words.append(word)
                 }
 

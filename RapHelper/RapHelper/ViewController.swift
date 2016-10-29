@@ -18,7 +18,7 @@ extension Array where Element: Equatable {
     }
 }
 
-let normalButtonColor = UIColor.green
+let normalButtonColor = UIColor.brown
 let activeButtonColor = UIColor.purple
 
 let normalButtonText = "Нажми"
@@ -31,6 +31,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var textFieldBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var underTextView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +50,20 @@ class ViewController: UIViewController {
         recordButton.layer.borderColor = UIColor.gray.cgColor
         
         textField.delegate = self
+        
+        textView.textColor = UIColor.white
+        
+        underTextView.layer.cornerRadius = 10
+        underTextView.clipsToBounds = true
+        
+        textView.backgroundColor = UIColor.clear //UIColor.gray.withAlphaComponent(0.2)
+        
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.alpha = 0.9
+        blurEffectView.frame = textView.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        underTextView.addSubview(blurEffectView)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
@@ -74,9 +89,11 @@ class ViewController: UIViewController {
     }
     
     func recognize(phrase words: [String]) {
-        let accentedPhrase = Accenter.setAccents(inPhrase: words)
+        let normalizedWords = words.map{ $0.lowercased() }
         
-        textView.text = words.joined(separator: " ")
+        let accentedPhrase = Accenter.setAccents(inPhrase: normalizedWords)
+        
+        textView.text = normalizedWords.joined(separator: " ")
         
         DispatchQueue.global().async {
             let wholeText = accentedPhrase.map({$0.accentText!}).joined(separator: " ")
@@ -99,7 +116,7 @@ class ViewController: UIViewController {
     
     @objc
     public func keyboardDidHide(n: NSNotification) {
-        textFieldBottomConstraint.constant = 5
+        textFieldBottomConstraint.constant = 10
     }
 }
 
@@ -146,6 +163,8 @@ extension ViewController: YSKRecognizerDelegate {
 }
 
 extension ViewController: UITextFieldDelegate {
+    
+    
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         textView.text = string
         

@@ -29,6 +29,7 @@ class Accenter {
                 word.accentText = result?.string(forColumn: "word_accent")
                 word.text = result?.string(forColumn: "word")
                 word.priority = result?.int(forColumn: "priority")
+                word.count = result?.int(forColumn: "count")
                 resultWords[word.text!] = word
             }
 

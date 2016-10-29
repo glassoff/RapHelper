@@ -12,6 +12,7 @@ class Word: Equatable {
     var text: String!
     var accentText: String!
     var priority: Int32!
+    var count: Int32!
 
     public static func ==(lhs: Word, rhs: Word) -> Bool {
         return lhs.accentText == rhs.accentText
@@ -37,6 +38,7 @@ class PhraseBuilder {
                 word.accentText = result?.string(forColumn: "word_accent")
                 word.text = result?.string(forColumn: "word")
                 word.priority = result?.int(forColumn: "priority")
+                word.count = result?.int(forColumn: "count")
 
                 if word.text.characters.count > 1 && word.text != rawWord {
                     words.append(word)
